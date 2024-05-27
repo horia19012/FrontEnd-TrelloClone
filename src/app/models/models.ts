@@ -13,3 +13,13 @@ export interface Project {
     status: string;
     owner: User;
 }
+
+export interface Task{
+    id:number;
+    taskName:string;
+    taskDescription:string;
+    deadline:Date;
+    priority:string;
+    status:string;
+    assignedToUser:User;
+}

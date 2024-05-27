@@ -1,37 +1,74 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-const BASE_URL = ["http://localhost:8000/"]
+const BASE_URL = 'http://localhost:8000/';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class JwtService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   register(signRequest: any): Observable<any> {
-    return this.http.post(BASE_URL + 'users/signup', signRequest)
+    return this.http
+      .post(BASE_URL + 'users/signup', signRequest, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      })
+      .pipe(catchError(this.handleError));
   }
 
   login(loginRequest: any): Observable<any> {
-    return this.http.post(BASE_URL + 'login', loginRequest)
+    return this.http
+      .post(BASE_URL + 'login', loginRequest, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        responseType: 'text', // Change response type to 'text'
+      })
+      .pipe(catchError(this.handleError));
   }
 
+  getProjects(): Observable<any> {
+    return this.http.get(BASE_URL + 'api/projects', {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(catchError(this.handleError));
+  }
 
+  getToken(): string | null {
+    return localStorage.getItem('jwt');
+  }
 
-  private createAuhtorizationHeader() {
-    const jwtToken = localStorage.getItem('jwt');
+  private createAuthorizationHeader(): HttpHeaders {
+    const jwtToken = this.getToken();
+    let headers = new HttpHeaders();
     if (jwtToken) {
-      console.log("JWT token found in local storage", jwtToken);
-      return new HttpHeaders().set(
-        "Authorization", "Bearer " + jwtToken
-      )
+      console.log('JWT token found in local storage', jwtToken);
+      headers = headers.set('Authorization', 'Bearer ' + jwtToken);
     } else {
-      console.log("JWT token not found in local storage");
+      console.log('No JWT token found in local storage');
     }
-    return null;
+    return headers;
   }
 
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Unknown error!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side errors
+      errorMessage = `Client-side error: ${error.error.message}`;
+    } else {
+      // Server-side errors
+      errorMessage = `Server-side error: Error Code: ${error.status}\nMessage: ${error.message}\nError Body: ${error.error}`;
+    }
+    console.error('Error during login:', error);
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
 }
