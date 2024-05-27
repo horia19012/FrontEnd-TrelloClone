@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Task } from '../models/models';
 
 const BASE_URL = 'http://localhost:8000/';
 
@@ -37,15 +38,24 @@ export class JwtService {
   }
 
   getProjects(): Observable<any> {
-    return this.http.get(BASE_URL + 'api/projects', {
-      headers: this.createAuthorizationHeader(),
-    }).pipe(catchError(this.handleError));
+    return this.http
+      .get(BASE_URL + 'api/projects', {
+        headers: this.createAuthorizationHeader(),
+      })
+      .pipe(catchError(this.handleError));
   }
 
   getToken(): string | null {
     return localStorage.getItem('jwt');
   }
 
+  getTasksByProjectId(projectId: number): Observable<Task[]> {
+    return this.http
+      .get<Task[]>(`${BASE_URL}api/tasks/project/${projectId}`, {
+        headers: this.createAuthorizationHeader(),
+      })
+      .pipe(catchError(this.handleError));
+  }
   private createAuthorizationHeader(): HttpHeaders {
     const jwtToken = this.getToken();
     let headers = new HttpHeaders();

@@ -1,12 +1,10 @@
-<!-- src/app/project-item/project-item.component.html -->
 <div class="project-card d-flex justify-content-between align-items-start">
-    <div>
-      <h3>{{ project?.projectName }}</h3>
-      <p>{{ project?.projectDescription }}</p>
-      <span class="deadline">Deadline: {{ project?.deadline | date }}</span>
-      <span class="status">Status: {{ project?.status }}</span>
-      <div class="owner">Owner: {{ project?.owner?.username }}</div>
-    </div>
-    <button class="btn btn-primary" (click)="showTasks()">Show Tasks</button>
+  <div>
+    <h3>{{ project?.projectName }}</h3>
+    <p>{{ project?.projectDescription }}</p>
+    <span class="deadline">Deadline: {{ project?.deadline | date }}</span>
+    <span class="status">Status: {{ project?.status }}</span>
+    <div class="owner">Owner: {{ project?.owner?.username }}</div>
   </div>
-  
+  <button class="btn btn-primary" [routerLink]="['/tasks', project.id]">Show Tasks</button>
+</div>

@@ -10,6 +10,8 @@ import { ProjectItemComponent } from './project-item/project-item.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { TaskItemComponent } from './task-item/task-item.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     RegisterComponent,
     LoginComponent,
     DashboardComponent,
+    TaskListComponent,
+    TaskItemComponent,
   
   ],
   imports: [

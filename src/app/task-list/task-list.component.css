@@ -1,0 +1,131 @@
+.container {
+  max-width: 100%;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #343a40;
+  font-family: 'Arial', sans-serif;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+
+.table thead th {
+  background-color: #343a40;
+  color: #fff;
+  border-color: #454d55;
+  text-align: center;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+td, th {
+  padding: 12px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+th {
+  font-weight: bold;
+}
+
+tbody td {
+  background-color: #fff;
+}
+
+thead th {
+  background-color: #007bff;
+  color: white;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .table-responsive > .table-bordered {
+    border: 0;
+  }
+  
+  .table thead, .table tbody, .table th, .table td, .table tr {
+    display: block;
+  }
+  
+  .table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  .table tr {
+    margin: 0 0 1rem 0;
+  }
+  
+  .table tr:nth-child(even) {
+    background: #f8f9fa;
+  }
+  
+  .table td {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+    position: relative;
+    padding-left: 50%;
+    white-space: nowrap;
+    text-align: left;
+  }
+  
+  .table td:before {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    width: calc(50% - 1rem);
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    content: attr(data-label);
+    transform: translateY(-50%);
+  }
+}
+
+.deadline {
+  color: #ff0000;
+}
+
+.priority {
+  font-weight: bold;
+}
+
+.status {
+  font-style: italic;
+}

@@ -1,3 +1,4 @@
+// models.ts
 export interface User {
     id: number;
     username: string;
@@ -14,12 +15,12 @@ export interface Project {
     owner: User;
 }
 
-export interface Task{
-    id:number;
-    taskName:string;
-    taskDescription:string;
-    deadline:Date;
-    priority:string;
-    status:string;
-    assignedToUser:User;
+export interface Task {
+    id: number;
+    taskName: string;
+    taskDescription: string;
+    deadline: Date;
+    priority: string;
+    status: string;
+    assignedToUser: User;
 }

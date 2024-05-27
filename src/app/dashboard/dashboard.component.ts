@@ -14,8 +14,16 @@ export class DashboardComponent implements OnInit {
   constructor(private service: JwtService) {}
 
   ngOnInit(): void {
-    this.username = localStorage.getItem('username'); // Retrieve the username
+    this.setUsername();
     this.printTokenAndGetProjects();
+  }
+
+  setUsername(): void {
+    if (typeof window !== 'undefined' && localStorage) {
+      this.username = localStorage.getItem('username'); // Retrieve the username
+    } else {
+      console.warn('localStorage is not available');
+    }
   }
 
   printTokenAndGetProjects(): void {
