@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Task } from '../models/models';
+import { Task, User } from '../models/models';
 
 const BASE_URL = 'http://localhost:8000/';
 
@@ -56,6 +56,29 @@ export class JwtService {
       })
       .pipe(catchError(this.handleError));
   }
+
+  getTasksByUsername(username: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${BASE_URL}}api/tasks/username/${username}`);
+  }
+
+  assignTaskToUser(taskId: number, username: string): Observable<Task> {
+    return this.http.put<Task>(`${BASE_URL}api/tasks/${taskId}/assign`, { username }, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(catchError(this.handleError));
+  }
+
+  updateTask(taskId: number, task: Task): Observable<Task> {
+    return this.http.put<Task>(`${BASE_URL}api/tasks/${taskId}`, task, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(catchError(this.handleError));
+  }
+
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(`${BASE_URL}users/${username}`, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(catchError(this.handleError));
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     const jwtToken = this.getToken();
     let headers = new HttpHeaders();

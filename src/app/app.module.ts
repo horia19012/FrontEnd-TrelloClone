@@ -14,6 +14,8 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+import { UsertaskComponent } from './usertask/usertask.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { AuthService } from './auth.service';
     DashboardComponent,
     TaskListComponent,
     TaskItemComponent,
+    UsertaskComponent,
+    NavbarComponent,
   
   ],
   imports: [

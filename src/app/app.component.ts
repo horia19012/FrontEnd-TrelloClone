@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth.service'; // Ensure this path is correct
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,10 @@ import { AuthService } from './auth.service'; // Ensure this path is correct
 export class AppComponent implements OnInit {
   title = 'trello_clone';
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService,private cdr: ChangeDetectorRef) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cdr.detectChanges();
+  }
 }
