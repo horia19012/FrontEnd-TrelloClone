@@ -1,9 +1,6 @@
 <div class="container mt-4">
-
   <div *ngFor="let task of tasks">
-    <app-task-item
-        [task]="task"
-        
-    ></app-task-item>
-    </div>
+    <app-task-item *ngIf="!username" [task]="task"></app-task-item>
+    <app-usertask *ngIf="username" [task]="task"></app-usertask>
+  </div>
 </div>
