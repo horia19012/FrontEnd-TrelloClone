@@ -58,7 +58,10 @@ export class JwtService {
   }
 
   getTasksByUsername(username: string): Observable<Task[]> {
-    return this.http.get<Task[]>(`${BASE_URL}}api/tasks/username/${username}`);
+    return this.http.get<Task[]>(`${BASE_URL}api/tasks/username/${username}`,{
+      headers:this.createAuthorizationHeader(),
+    })
+    .pipe(catchError(this.handleError));
   }
 
   assignTaskToUser(taskId: number, username: string): Observable<Task> {
