@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     if (this.authService.isLocalStorageAvailable()){
     localStorage.removeItem('jwt');
     localStorage.removeItem('username');
+    localStorage.removeItem('userId');
     }
     
     this.cdr.detectChanges();
@@ -45,6 +46,18 @@ export class LoginComponent implements OnInit {
             const jwtToken = response;
             localStorage.setItem('jwt', jwtToken);
             localStorage.setItem('username', this.loginForm.value.username); // Store the username
+
+            this.service.getUserByUsername(this.loginForm.value.username).subscribe(
+              (user) => {
+                localStorage.setItem('userId', user.id.toString()); // Store the user ID
+                this.router.navigateByUrl('/dashboard');
+              },
+              (error) => {
+                console.error('Error fetching user details:', error);
+                alert('Login failed: Unable to fetch user details.');
+              }
+            );
+            
             this.router.navigateByUrl('/dashboard');
           } else {
             alert('Login failed: No token received.');

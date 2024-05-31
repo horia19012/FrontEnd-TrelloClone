@@ -1,0 +1,73 @@
+<div class="container mt-5">
+    <h2>Create a New Task</h2>
+    <form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="taskName">Task Name</label>
+        <input
+          type="text"
+          id="taskName"
+          formControlName="taskName"
+          class="form-control"
+          placeholder="Enter task name"
+        />
+        <div *ngIf="createTaskForm.get('taskName').invalid && (createTaskForm.get('taskName').touched || createTaskForm.get('taskName').dirty)" class="text-danger">
+          Task Name is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="taskDescription">Task Description</label>
+        <textarea
+          id="taskDescription"
+          formControlName="taskDescription"
+          class="form-control"
+          placeholder="Enter task description"
+        ></textarea>
+        <div *ngIf="createTaskForm.get('taskDescription').invalid && (createTaskForm.get('taskDescription').touched || createTaskForm.get('taskDescription').dirty)" class="text-danger">
+          Task Description is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="deadline">Deadline</label>
+        <input
+          type="date"
+          id="deadline"
+          formControlName="deadline"
+          class="form-control"
+        />
+        <div *ngIf="createTaskForm.get('deadline').invalid && (createTaskForm.get('deadline').touched || createTaskForm.get('deadline').dirty)" class="text-danger">
+          Deadline is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" formControlName="priority" class="form-control">
+          <option value="" disabled>Select priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        <div *ngIf="createTaskForm.get('priority').invalid && (createTaskForm.get('priority').touched || createTaskForm.get('priority').dirty)" class="text-danger">
+          Priority is required
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" formControlName="status" class="form-control">
+          <option value="" disabled>Select status</option>
+          <option value="Not Started">Not Started</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+        <div *ngIf="createTaskForm.get('status').invalid && (createTaskForm.get('status').touched || createTaskForm.get('status').dirty)" class="text-danger">
+          Status is required
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="createTaskForm.invalid">Create Task</button>
+    </form>
+  </div>
+  

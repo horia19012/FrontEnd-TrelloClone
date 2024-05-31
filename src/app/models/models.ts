@@ -22,5 +22,6 @@ export interface Task {
     deadline: Date;
     priority: string;
     status: string;
-    assignedToUser: User;
+    assignedToUser?: User;
+    project: Project;
 }

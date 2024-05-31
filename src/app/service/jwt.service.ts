@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Task, User } from '../models/models';
+import { Project, Task, User } from '../models/models';
 
 const BASE_URL = 'http://localhost:8000/';
 
@@ -82,6 +82,19 @@ export class JwtService {
     }).pipe(catchError(this.handleError));
   }
 
+  getUserById(userId: number): Observable<User> {
+    return this.http.get<User>(`${BASE_URL}users/id/${userId}`, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(catchError(this.handleError));
+  }
+
+
+  deleteProject(projectId: number): Observable<void> {
+    return this.http.delete<void>(`${BASE_URL}api/projects/${projectId}`, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(catchError(this.handleError));
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     const jwtToken = this.getToken();
     let headers = new HttpHeaders();
@@ -92,6 +105,20 @@ export class JwtService {
       console.log('No JWT token found in local storage');
     }
     return headers;
+  }
+
+  createProject(project: any): Observable<any> {
+    return this.http
+      .post(BASE_URL + 'api/projects', project, {
+        headers: this.createAuthorizationHeader(),
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  createTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(`${BASE_URL}api/tasks`, task, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

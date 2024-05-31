@@ -15,6 +15,9 @@ import { TaskItemComponent } from './task-item/task-item.component';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { UsertaskComponent } from './usertask/usertask.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { UserProjectsComponent } from './user-projects/user-projects.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { UsertaskComponent } from './usertask/usertask.component';
     TaskListComponent,
     TaskItemComponent,
     UsertaskComponent,
+    CreateProjectComponent,
+    UserProjectsComponent,
+    CreateTaskComponent,
     
   
   ],
